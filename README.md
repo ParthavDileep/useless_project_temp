@@ -1,34 +1,33 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# [Procrastinators Timer] 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: [Void]
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
+- Team Lead: [Parthav Dileep S] - [College of Engineering Thalassery]
+- Member 2: [Surabhi Aneesh] - [College of Engineering Thalassery]
 - Member 3: [Name] - [College]
 
 ### Project Description
-[2-3 lines about what your project does]
-
+This project is on a procrastinators timer which sets time according to the users needs but it delays the time making the user to rethink on doing a task later. It makes many excuses to delay the time.
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+How to procrastinate better
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+It helps procrastination by purposefully delaying time 
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
+- [HTML,CSS,JAVASCRIPT]
 - [Frameworks used]
 - [Libraries used]
-- [Tools used]
+- [VSCODE ,GIT]
 
 For Hardware:
 - [List main components]
@@ -49,12 +48,15 @@ For Software:
 # Screenshots (Add at least 3)
 ![Screenshot1](Add screenshot 1 here with proper name)
 *Add caption explaining what this shows*
+<img width="3188" height="1202" alt="frame (3)" src="img/img1.png" />
 
 ![Screenshot2](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
+<img width="3188" height="1202" alt="frame (3)" src="img/img2.png" />
 
 ![Screenshot3](Add screenshot 3 here with proper name)
 *Add caption explaining what this shows*
+<img width="3188" height="1202" alt="frame (3)" src="img/img3.png" />
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
