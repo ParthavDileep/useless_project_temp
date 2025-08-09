@@ -6,6 +6,7 @@
 }
 
 * { box-sizing: border-box; }
+
 html, body {
   height: 100%;
   margin: 0;
@@ -30,6 +31,12 @@ html, body {
   padding: 26px;
   box-shadow: 0 10px 30px rgba(2,6,23,0.6);
   border: 1px solid rgba(255,255,255,0.03);
+  animation: floatIn 0.6s ease-out;
+}
+
+@keyframes floatIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 h1 { margin: 0 0 8px; font-size: 20px; }
@@ -40,7 +47,6 @@ p.lead { margin: 0 0 18px; color: var(--muted); }
   gap: 12px;
   align-items: center;
 }
-
 input[type=number] {
   width: 120px;
   padding: 10px 12px;
@@ -50,7 +56,6 @@ input[type=number] {
   color: inherit;
   font-size: 16px;
 }
-
 .btn {
   padding: 10px 14px;
   border-radius: 10px;
@@ -59,14 +64,14 @@ input[type=number] {
   color: #071021;
   font-weight: 700;
   cursor: pointer;
+  transition: transform 0.1s;
 }
-
+.btn:hover { transform: scale(1.05); }
 .btn.ghost {
   background: transparent;
   color: var(--accent);
   border: 1px solid rgba(255,204,0,0.12);
 }
-
 .status {
   margin-top: 18px;
   padding: 16px;
@@ -78,30 +83,14 @@ input[type=number] {
   align-items: center;
   gap: 12px;
 }
-
-.excuse {
-  font-weight: 700;
-  color: #ffd966;
-}
-
+.excuse { font-weight: 700; color: #ffd966; }
 .timer {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   margin-left: auto;
   font-size: 20px;
 }
-
-.small {
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 10px;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-}
-
+.small { font-size: 13px; color: var(--muted); margin-top: 10px; }
+.actions { display: flex; gap: 8px; margin-top: 14px; }
 .snooze {
   background: #1b2836;
   color: #e6eef6;
@@ -110,7 +99,6 @@ input[type=number] {
   border: 0;
   cursor: pointer;
 }
-
 .log {
   margin-top: 16px;
   max-height: 140px;
@@ -121,14 +109,7 @@ input[type=number] {
   font-size: 13px;
   color: var(--muted);
 }
-
-.log .log-item { margin-bottom: 6px; }
-
-.wiggle {
-  display: inline-block;
-  animation: wig 1200ms ease-in-out infinite;
-}
-
+.wiggle { display: inline-block; animation: wig 1200ms ease-in-out infinite; }
 @keyframes wig {
   0% { transform: translateY(0) }
   25% { transform: translateY(-4px) rotate(-2deg) }
@@ -136,73 +117,31 @@ input[type=number] {
   75% { transform: translateY(-2px) rotate(2deg) }
   100% { transform: translateY(0) }
 }
-
-footer {
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-@media (max-width:520px) {
+footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
+@media (max-width: 520px) {
   .controls { flex-direction: column; align-items: stretch; }
   input[type=number] { width: 100%; }
   .timer { margin-left: 0; }
 }
 
-/* Flip clock effect */
-.flip-digit {
-  display: inline-block;
-  min-width: 20px;
-  text-align: center;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 22px;
-  color: var(--accent);
-  text-shadow: 0 0 8px rgba(255,204,0,0.6);
-  transform-origin: center bottom;
-}
-
-.flip {
-  animation: flipAnim 0.3s ease forwards;
-}
-
-@keyframes flipAnim {
-  0%   { transform: rotateX(0deg); }
-  50%  { transform: rotateX(-90deg); }
-  51%  { transform: rotateX(90deg); }
-  100% { transform: rotateX(0deg); }
-}
-
-/* End screen styling */
+/* End Screen Styling */
 .end-screen {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at center, #ffcc00 0%, #ff8800 100%);
-  display: flex;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 999;
+}
+.end-card {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 12px;
   text-align: center;
-  transition: opacity 0.4s ease;
+  animation: popIn 0.5s ease-out;
 }
-
-.end-screen.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.end-content h2 {
-  font-size: 40px;
-  margin-bottom: 10px;
-  color: #071021;
-}
-
-.end-content p {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.big-btn {
-  font-size: 18px;
-  padding: 14px 20px;
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
