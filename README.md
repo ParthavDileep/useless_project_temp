@@ -61,7 +61,7 @@ For Software:
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
 *Add caption explaining your workflow*
-
+<img width="3188" height="1202" alt="frame (3)" src="img/img4.jpg" />
 For Hardware:
 
 # Schematic & Circuit
