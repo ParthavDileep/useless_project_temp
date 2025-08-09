@@ -18,12 +18,16 @@ const minutesInput = document.getElementById('minutes');
 const startBtn = document.getElementById('startBtn');
 const begBtn = document.getElementById('begBtn');
 const status = document.getElementById('status');
-const display = document.getElementById('display');
 const snoozeBtn = document.getElementById('snoozeBtn');
 const resetBtn = document.getElementById('resetBtn');
 const logEl = document.getElementById('log');
 const endScreen = document.getElementById('endScreen');
 const startAgainBtn = document.getElementById('startAgainBtn');
+
+const minTens = document.getElementById('minTens').querySelector('span');
+const minOnes = document.getElementById('minOnes').querySelector('span');
+const secTens = document.getElementById('secTens').querySelector('span');
+const secOnes = document.getElementById('secOnes').querySelector('span');
 
 let totalSeconds = 0;
 let timerInterval = null;
@@ -34,18 +38,46 @@ function log(msg) {
   logEl.insertAdjacentHTML('afterbegin', `<div>▶ [${time}] ${msg}</div>`);
 }
 
-function fmt(s) {
-  const m = Math.floor(s / 60).toString().padStart(2, '0');
-  const sec = Math.floor(s % 60).toString().padStart(2, '0');
-  return `${m}:${sec}`;
+function fmtDigits(s) {
+  let m = Math.floor(s / 60);
+  let sec = s % 60;
+  return {
+    mT: Math.floor(m / 10),
+    mO: m % 10,
+    sT: Math.floor(sec / 10),
+    sO: sec % 10
+  };
 }
 
-function randomBetween(a, b) {
-  return Math.floor(Math.random() * (b - a + 1)) + a;
+function updateFlipClock() {
+  const { mT, mO, sT, sO } = fmtDigits(totalSeconds);
+  flipDigit(minTens, mT);
+  flipDigit(minOnes, mO);
+  flipDigit(secTens, sT);
+  flipDigit(secOnes, sO);
 }
 
-function updateDisplay() {
-  display.textContent = totalSeconds > 0 ? fmt(totalSeconds) : '--:--';
+function flipDigit(digitEl, newVal) {
+  if (digitEl.textContent == newVal) return;
+  digitEl.style.transform = 'rotateX(-90deg)';
+  setTimeout(() => {
+    digitEl.textContent = newVal;
+    digitEl.style.transform = 'rotateX(0deg)';
+  }, 250);
+}
+
+function typeExcuse(excuse) {
+  status.innerHTML = `<span class="excuse"></span>`;
+  let span = status.querySelector('.excuse');
+  let i = 0;
+  function type() {
+    if (i < excuse.length) {
+      span.textContent += excuse.charAt(i);
+      i++;
+      setTimeout(type, 40);
+    }
+  }
+  type();
 }
 
 function startCountdown() {
@@ -58,8 +90,8 @@ function startCountdown() {
       return;
     }
     totalSeconds -= 1;
-    updateDisplay();
-    status.textContent = `Time left: ${fmt(totalSeconds)}`;
+    updateFlipClock();
+    status.textContent = `Time left: ${Math.floor(totalSeconds / 60)}:${(totalSeconds % 60).toString().padStart(2, '0')}`;
   }, 1000);
 }
 
@@ -71,15 +103,15 @@ async function procrastinate(skip = false) {
   resetBtn.disabled = true;
   snoozeBtn.disabled = true;
 
-  let delays = skip ? 0 : randomBetween(2, 5);
-  log(`Procrastination session started — ${delays} delay(s).`);
+  let delays = skip ? 0 : Math.floor(Math.random() * 4) + 2;
+  log(`Procrastination started — ${delays} delay(s).`);
 
   for (let i = 0; i < delays; i++) {
     if (abortProcrastination) break;
     const excuse = EXCUSES[Math.floor(Math.random() * EXCUSES.length)];
-    status.innerHTML = `<span class="excuse">${excuse}</span>`;
+    typeExcuse(excuse);
     log(`Excuse: ${excuse}`);
-    await new Promise(res => setTimeout(res, randomBetween(minDelay, maxDelay)));
+    await new Promise(res => setTimeout(res, Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay));
   }
 
   status.textContent = '...Fine. Starting now.';
@@ -99,7 +131,7 @@ function showEndScreen() {
 startBtn.addEventListener('click', () => {
   const mins = Math.max(1, Math.floor(Number(minutesInput.value) || 1));
   totalSeconds = mins * 60;
-  updateDisplay();
+  updateFlipClock();
   procrastinate(false);
 });
 
@@ -107,27 +139,24 @@ begBtn.addEventListener('click', () => {
   status.textContent = "Okay okay okay — starting now. (You begged.)";
   const mins = Math.max(1, Math.floor(Number(minutesInput.value) || 1));
   totalSeconds = mins * 60;
-  updateDisplay();
+  updateFlipClock();
   procrastinate(true);
 });
 
 snoozeBtn.addEventListener('click', () => {
   if (!timerInterval) return;
-  const addSeconds = randomBetween(30, 120);
+  const addSeconds = Math.floor(Math.random() * 91) + 30;
   totalSeconds += addSeconds;
   status.textContent = `Snoozed +${addSeconds}s. Back to procrastinating (kinda).`;
-  updateDisplay();
+  updateFlipClock();
   log(`Snoozed +${addSeconds}s`);
 });
 
 resetBtn.addEventListener('click', () => {
-  if (timerInterval) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
   abortProcrastination = true;
   totalSeconds = 0;
-  updateDisplay();
+  updateFlipClock();
   status.textContent = 'Reset. You can try again when ready.';
   startBtn.disabled = false;
   begBtn.disabled = false;
@@ -139,10 +168,10 @@ resetBtn.addEventListener('click', () => {
 
 startAgainBtn.addEventListener('click', () => {
   endScreen.style.display = "none";
-  totalSeconds = 15; // restart with 15 seconds
-  updateDisplay();
+  totalSeconds = 15;
+  updateFlipClock();
   startCountdown();
 });
 
-updateDisplay();
+updateFlipClock();
 log('Ready.');

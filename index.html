@@ -10,23 +10,29 @@
   <div class="wrap">
     <div class="card">
       <h1>Procrastinator's Timer <span class="wiggle">🕒</span></h1>
-      <p class="lead">Set a time. The app will thoughtfully delay itself with excuses before (maybe) starting. For best results, let it have its fun.</p>
+      <p class="lead">Set a time. This timer will lovingly delay itself with excuses before starting.</p>
 
       <div class="controls">
         <input id="minutes" type="number" min="1" value="1" />
         <button id="startBtn" class="btn">Start (maybe)</button>
         <button id="begBtn" class="btn ghost">Beg to start now</button>
-        <div class="timer" id="display">--:--</div>
+        <div class="flip-clock" id="flipClock">
+          <div class="digit" id="minTens"><span>0</span></div>
+          <div class="digit" id="minOnes"><span>0</span></div>
+          <div class="colon">:</div>
+          <div class="digit" id="secTens"><span>0</span></div>
+          <div class="digit" id="secOnes"><span>0</span></div>
+        </div>
       </div>
 
       <div class="status" id="status">Ready to procrastinate.</div>
 
       <div class="actions">
-        <button id="snoozeBtn" class="snooze" disabled>Continue procastinating</button>
+        <button id="snoozeBtn" class="snooze" disabled>Continue procrastinating</button>
         <button id="resetBtn" class="snooze" disabled>Reset</button>
       </div>
 
-      <div class="small">Tip: Press "Beg to start now" to skip excuses. Or don't—I'm not your boss.</div>
+      <div class="small">Press "Beg to start now" to skip excuses. Or don’t—I'm not your boss.</div>
 
       <div class="log" id="log"></div>
 
@@ -38,7 +44,7 @@
   <div class="end-screen" id="endScreen">
     <div class="end-card">
       <h2>⏰ Time’s Up!</h2>
-      <p>You actually finished? Start your work!  </p>
+      <p>You actually finished? Start your Work!</p>
       <button id="startAgainBtn" class="btn">Start Again</button>
     </div>
   </div>

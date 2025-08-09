@@ -46,7 +46,9 @@ p.lead { margin: 0 0 18px; color: var(--muted); }
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
 }
+
 input[type=number] {
   width: 120px;
   padding: 10px 12px;
@@ -56,6 +58,7 @@ input[type=number] {
   color: inherit;
   font-size: 16px;
 }
+
 .btn {
   padding: 10px 14px;
   border-radius: 10px;
@@ -72,6 +75,7 @@ input[type=number] {
   color: var(--accent);
   border: 1px solid rgba(255,204,0,0.12);
 }
+
 .status {
   margin-top: 18px;
   padding: 16px;
@@ -79,17 +83,9 @@ input[type=number] {
   background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
   font-size: 18px;
   min-height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
+
 .excuse { font-weight: 700; color: #ffd966; }
-.timer {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  margin-left: auto;
-  font-size: 20px;
-}
-.small { font-size: 13px; color: var(--muted); margin-top: 10px; }
 .actions { display: flex; gap: 8px; margin-top: 14px; }
 .snooze {
   background: #1b2836;
@@ -99,6 +95,7 @@ input[type=number] {
   border: 0;
   cursor: pointer;
 }
+
 .log {
   margin-top: 16px;
   max-height: 140px;
@@ -109,6 +106,7 @@ input[type=number] {
   font-size: 13px;
   color: var(--muted);
 }
+
 .wiggle { display: inline-block; animation: wig 1200ms ease-in-out infinite; }
 @keyframes wig {
   0% { transform: translateY(0) }
@@ -117,14 +115,34 @@ input[type=number] {
   75% { transform: translateY(-2px) rotate(2deg) }
   100% { transform: translateY(0) }
 }
-footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
-@media (max-width: 520px) {
-  .controls { flex-direction: column; align-items: stretch; }
-  input[type=number] { width: 100%; }
-  .timer { margin-left: 0; }
-}
 
-/* End Screen Styling */
+footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
+
+/* Flip clock styling */
+.flip-clock {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.digit {
+  background: #1b2836;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 0 2px;
+  perspective: 1000px;
+  color: var(--accent);
+  min-width: 30px;
+  text-align: center;
+}
+.digit span {
+  display: block;
+  transform-origin: bottom;
+  transition: transform 0.5s ease-in-out;
+}
+.colon { margin: 0 4px; }
+
+/* End Screen */
 .end-screen {
   position: fixed;
   inset: 0;
