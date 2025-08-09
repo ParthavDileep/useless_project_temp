@@ -1,0 +1,208 @@
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --accent: #ffcc00;
+  --muted: #94a3b8;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+  color: #e6eef6;
+  background: linear-gradient(180deg, #071021 0%, #071525 60%);
+}
+
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 26px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+h1 { margin: 0 0 8px; font-size: 20px; }
+p.lead { margin: 0 0 18px; color: var(--muted); }
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+input[type=number] {
+  width: 120px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+  color: inherit;
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--accent);
+  color: #071021;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(255,204,0,0.12);
+}
+
+.status {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  font-size: 18px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.excuse {
+  font-weight: 700;
+  color: #ffd966;
+}
+
+.timer {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.snooze {
+  background: #1b2836;
+  color: #e6eef6;
+  border-radius: 8px;
+  padding: 8px 10px;
+  border: 0;
+  cursor: pointer;
+}
+
+.log {
+  margin-top: 16px;
+  max-height: 140px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.01);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.log .log-item { margin-bottom: 6px; }
+
+.wiggle {
+  display: inline-block;
+  animation: wig 1200ms ease-in-out infinite;
+}
+
+@keyframes wig {
+  0% { transform: translateY(0) }
+  25% { transform: translateY(-4px) rotate(-2deg) }
+  50% { transform: translateY(0) }
+  75% { transform: translateY(-2px) rotate(2deg) }
+  100% { transform: translateY(0) }
+}
+
+footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width:520px) {
+  .controls { flex-direction: column; align-items: stretch; }
+  input[type=number] { width: 100%; }
+  .timer { margin-left: 0; }
+}
+
+/* Flip clock effect */
+.flip-digit {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 22px;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(255,204,0,0.6);
+  transform-origin: center bottom;
+}
+
+.flip {
+  animation: flipAnim 0.3s ease forwards;
+}
+
+@keyframes flipAnim {
+  0%   { transform: rotateX(0deg); }
+  50%  { transform: rotateX(-90deg); }
+  51%  { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+/* End screen styling */
+.end-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, #ffcc00 0%, #ff8800 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.end-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.end-content h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #071021;
+}
+
+.end-content p {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.big-btn {
+  font-size: 18px;
+  padding: 14px 20px;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Procrastinator's Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Procrastinator's Timer <span class="wiggle">🕒</span></h1>
+      <p class="lead">Set a time. The app will thoughtfully delay itself with excuses before (maybe) starting. For true results, resist the urge to beg it to begin.</p>
+
+      <div class="controls">
+        <input id="minutes" type="number" min="1" value="1" />
+        <button id="startBtn" class="btn">Start (maybe)</button>
+        <button id="begBtn" class="btn ghost">Beg to start now</button>
+        <div class="timer" id="display">
+          <span class="flip-digit">-</span>
+          <span class="flip-digit">-</span>
+          :
+          <span class="flip-digit">-</span>
+          <span class="flip-digit">-</span>
+        </div>
+      </div>
+
+      <div class="status" id="status">Ready to procrastinate.</div>
+
+      <div class="actions">
+        <button id="snoozeBtn" class="snooze" disabled>Snooze</button>
+        <button id="resetBtn" class="snooze" disabled>Reset</button>
+      </div>
+
+      <div class="small">Tip: press "Beg to start now" to skip excuses. Or don't—I'm not your boss.</div>
+
+      <div class="log" id="log"></div>
+
+      <footer>Built for delightful delay — local only, no telemetry.</footer>
+    </div>
+  </div>
+
+  <!-- Ending screen -->
+  <div id="endScreen" class="end-screen hidden" aria-hidden="true">
+    <div class="end-content">
+      <h2>⏰ Time’s Up!</h2>
+      <p>You actually made it. Now go do the thing!</p>
+      <button id="restartBtn" class="btn big-btn">Start Again</button>
+    </div>
+  </div>
+
+  <!-- Tick sound -->
+  <audio id="tickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_13ec23bbd8.mp3?filename=click-124467.mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
